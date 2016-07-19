@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Web.Http;
 using System.Web.Routing;
 using Serilog;
+using System.Configuration;
 
 namespace Hostsol.Demo.BlueGreenTestWeb
 {
@@ -23,11 +24,11 @@ namespace Hostsol.Demo.BlueGreenTestWeb
 
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.ColoredConsole()
-                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.Seq(ConfigurationManager.AppSettings["SeqServerUrl"])
                 .CreateLogger();
 
             //emulate long warmup process
-            System.Threading.Thread.Sleep(20000);
+            System.Threading.Thread.Sleep(10000);
             StartUpComplete = true;
         }
 
