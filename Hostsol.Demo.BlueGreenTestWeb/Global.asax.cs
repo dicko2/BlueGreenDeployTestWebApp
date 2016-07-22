@@ -29,15 +29,18 @@ namespace Hostsol.Demo.BlueGreenTestWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            
             Log.Logger = new LoggerConfiguration()
                 .Enrich.WithProperty("MachineName",Environment.MachineName)
                 .Enrich.WithProperty("AppName", _assembly.GetName().Name)
                 .Enrich.WithProperty("AppVersion", _assembly.GetName().Version)
-                .WriteTo.ColoredConsole()
+                .WriteTo.Trace()
                 .WriteTo.Seq(ConfigurationManager.AppSettings["SeqServerUrl"])
+                .MinimumLevel.Verbose()
                 .CreateLogger();
+
             Log.Debug("Application_Start");
+
             //emulate long warmup process
             System.Threading.Thread.Sleep(10000);
             StartUpComplete = true;
