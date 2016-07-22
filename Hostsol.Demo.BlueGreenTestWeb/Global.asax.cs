@@ -37,7 +37,7 @@ namespace Hostsol.Demo.BlueGreenTestWeb
                 .WriteTo.ColoredConsole()
                 .WriteTo.Seq(ConfigurationManager.AppSettings["SeqServerUrl"])
                 .CreateLogger();
-
+            Log.Debug("Application_Start");
             //emulate long warmup process
             System.Threading.Thread.Sleep(10000);
             StartUpComplete = true;
