@@ -11,16 +11,18 @@ namespace Hostsol.Demo.BlueGreenCheckConsole
     {
         static void Main(string[] args)
         {
-            DoStuff();
+            DoStuff(args[0]);
         }
 
-        async static Task DoStuff()
+        async static Task DoStuff(string Url)
         {
             while (true)
             {
                 using (var client = new HttpClient())
                 {
-                    var response = GetResponseText("http://localhost:29977/MyObject/Index/2");
+                    //"http://localhost:29977/MyObject/Index/2"
+
+                    var response = GetResponseText(Url);
                     Console.WriteLine(response.Result.StatusCode.ToString());
                 }
             }
